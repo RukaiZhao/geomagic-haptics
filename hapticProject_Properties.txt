@@ -1,0 +1,15 @@
+C:\OpenHaptics\Developer\3.4.0\include;C:\OpenHaptics\Developer\3.4.0\utilities\include;C:\OpenHaptics\Developer\3.4.0\Quickhaptics\header;
+$(OH_SDK_BASE)\lib\$(Platform)\$(Configuration);$(OH_SDK_BASE)\utilities\lib\$(Platform)\$(Configuration);$(OH_SDK_BASE)\QuickHaptics\lib\$(Platform)\$(Configuration);
+hd.lib;hdu.lib;hl.lib;hlu.lib;hapticmouse.lib;snapconstraints.lib;Qh.lib;QHWin32Wrapper.lib;QHGLUTWrapper.lib;glui32.lib;glut32.lib;
+
+
+
+%(AdditionalLibraryDirectories);
+
+
+C:\OpenHaptics\Developer\3.4.0\lib\x64\Release\hd.lib;C:\OpenHaptics\Developer\3.4.0\lib\x64\Release\hl.lib;C:\OpenHaptics\Developer\3.4.0\utilities\lib\x64\Release\glut32.lib;C:\OpenHaptics\Developer\3.4.0\utilities\lib\x64\Release\glui32.lib;C:\OpenHaptics\Developer\3.4.0\utilities\lib\x64\Release\hdu.lib;C:\OpenHaptics\Developer\3.4.0\utilities\lib\x64\Release\hlu.lib;C:\OpenHaptics\Developer\3.4.0\utilities\lib\x64\Release\HapticMouse.lib;C:\OpenHaptics\Developer\3.4.0\utilities\lib\x64\Release\SnapConstraints.lib;
+C:\OpenHaptics\Developer\3.4.0\Quickhaptics\lib\x64\Release\QH.lib;
+C:\OpenHaptics\Developer\3.4.0\Quickhaptics\lib\x64\Release\QHGLUTWrapper.lib;
+C:\OpenHaptics\Developer\3.4.0\Quickhaptics\lib\x64\Release\QHWin32Wrapper.lib;
+C:\Program Files\MATLAB\R2018a\sys\lcc64\lcc64\lib64\opengl32.lib
+
