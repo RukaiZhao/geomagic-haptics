@@ -50,6 +50,7 @@ unsigned int _stdcall recieve_position(void* data) {
 		client_pos[1] = client_y;
 		client_pos[2] = client_z;
 
+		//assign the calculated force result to the global force variable
 		result_force = Force_calculation(client_pos);
 
 		memset(rec_buffer, 0, sizeof(rec_buffer));
@@ -58,7 +59,7 @@ unsigned int _stdcall recieve_position(void* data) {
 		return 0;
 }
 
-// sending force thread
+//sending force thread
 unsigned int _stdcall send_force(void* data) {
 	char send_buffer[1024];
 	int* client_ptr = (int*)data;
@@ -66,13 +67,15 @@ unsigned int _stdcall send_force(void* data) {
 	
 	while (true) {
 		int j;
+		//Construct the sending buffer
 		j = sprintf_s(send_buffer, 1024, "%f\n", result_force[0]);
 		j += sprintf_s(send_buffer + j, 1024 - j, "%f\n", result_force[1]);
 		j += sprintf_s(send_buffer + j, 1024 - j, "%f\n", result_force[2]);
 		send(client, send_buffer, sizeof(send_buffer), NULL);
 		memset(send_buffer, 0, sizeof(send_buffer));
+		//If this line is deleted will result in sudden pulse in the haptic device
 		cout << "force send: " << result_force[0] << " " << result_force[1] << " " << result_force[2] << endl;
-		//Sleep(1);
+		//Sleep(1); 
 	}
 	
 	return 0;
@@ -81,19 +84,20 @@ unsigned int _stdcall send_force(void* data) {
 
 int main()
 {
+	//TCP Socket Programming
 	WSADATA WSAData;
 	SOCKET server, client;
 	SOCKADDR_IN serverAddr, clientAddr;
 
 	WSAStartup(MAKEWORD(2, 0), &WSAData);
-	server = socket(AF_INET, SOCK_STREAM, 0);
+	server = socket(AF_INET, SOCK_STREAM, 0);//create socket
 
 	serverAddr.sin_addr.s_addr = INADDR_ANY;
-	serverAddr.sin_family = AF_INET;
-	serverAddr.sin_port = htons(5555);
+	serverAddr.sin_family = AF_INET;// Defines type of socket (IPv4 Socket)
+	serverAddr.sin_port = htons(5555); // Port
 
-	bind(server, (SOCKADDR *)&serverAddr, sizeof(serverAddr));
-	if ((listen(server, 0)) != 0) {
+	bind(server, (SOCKADDR *)&serverAddr, sizeof(serverAddr));//socket binding
+	if ((listen(server, 0)) != 0) {//listening on port for incoming connection
 		cout << "Listen failed" << endl;
 	}
 	else {
@@ -102,7 +106,7 @@ int main()
 
 	
 	int clientAddrSize = sizeof(clientAddr);
-	if ((client = accept(server, (SOCKADDR *)&clientAddr, &clientAddrSize)) != INVALID_SOCKET)
+	if ((client = accept(server, (SOCKADDR *)&clientAddr, &clientAddrSize)) != INVALID_SOCKET)//accepting client
 	{
 		cout << "Client connected!" << endl;
 		
